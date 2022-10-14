@@ -1,19 +1,20 @@
-const productsService = require('../services/products.service');
+const productService = require('../services/product.service');
 
-async function getAllProducts(_req, res) {
-  const result = await productsService.getAllProducts();
-
+const controllerGetAll = async (_req, res) => {
+  const result = await productService.serviceGetAll();
   res.status(result.status).json(result.message);
-}
+};
 
-async function getProductsById(req, res) {
+const controllerGetById = async (req, res) => {
   const { id } = req.params;
-  const result = await productsService.getProductsById(id);
+  const { type, message } = await productService.serviceGetById(id);
 
-  res.status(result.status).json(result.message);
-}
+  if (type) return res.status(404).json({ message });
+  
+  res.status(200).json(message);
+};
 
 module.exports = {
-  getAllProducts,
-  getProductsById,
+  controllerGetAll,
+  controllerGetById,
 };
