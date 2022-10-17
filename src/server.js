@@ -3,7 +3,7 @@ require('dotenv').config();
 
 // não altere esse arquivo, essa estrutura é necessária para à avaliação do projeto
 
-const port = process.env.port || 3001;
+const port = process.env.port || 3000;
 app.listen(port, () => {
   console.log(`Escutando na porta ${port}`);
 });
