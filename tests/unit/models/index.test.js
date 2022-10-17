@@ -22,4 +22,12 @@ describe('Camada Models => Testes unitários', () => {
 
     expect(result).to.equal(mocks.allProductsResponse[0]);
   });
+
+  it('Verifica se a função "pushNewProduct" retorna os dados esperados', async () => {
+    sinon.stub(connection, 'execute').resolves([{ insertId: 4 }]);
+
+    const result = await productsModel.pushNewProduct('Product');
+
+    expect(JSON.stringify(result)).to.equal(JSON.stringify({ id: 4, name: 'Product' }));
+  });
 });
