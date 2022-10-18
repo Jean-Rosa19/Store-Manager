@@ -4,7 +4,6 @@ const findAll = async () => {
   const result = await productsModel.findAll();
   return result;
 };
-
 const thisProductExists = async (id) => {
   const product = await productsModel.giveProduct(id);
   if (!product) {
@@ -12,7 +11,6 @@ const thisProductExists = async (id) => {
   }
   return { product };
 };
-
 const addNewProduct = async (name) => {
   if (name.length < 5) {
     return { message: '"name" length must be at least 5 characters long' };
@@ -21,4 +19,16 @@ const addNewProduct = async (name) => {
   return { createdProduct };
 };
 
-module.exports = { thisProductExists, findAll, addNewProduct };
+const updateProduct = async (data) => {
+  const ids = (await productsModel.findAll()).map((p) => p.id);
+  if (data.name.length < 5) {
+    return { error: { status: 422, message: '"name" length must be at least 5 characters long' } };
+  }
+  if (ids.includes(Number(data.id))) {
+    const result = await productsModel.altAProduct(data);
+    return { updatedProduct: result };
+  }
+  return { error: { status: 404, message: 'Product not found' } };
+};
+
+module.exports = { thisProductExists, findAll, addNewProduct, updateProduct };
