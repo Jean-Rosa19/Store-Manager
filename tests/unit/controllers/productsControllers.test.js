@@ -55,7 +55,7 @@ describe('Camada Controller => Testes unitários', () => {
 
     sinon.stub(productsService, 'addNewProduct').resolves({ createdProduct: wantedResponse });
 
-    await productsController.putProduct(req, res);
+    await productsController.postProduct(req, res);
 
     expect(res.status).to.have.been.calledWith(201);
     expect(res.json).to.have.been.calledWith(wantedResponse);
@@ -71,7 +71,7 @@ describe('Camada Controller => Testes unitários', () => {
 
     sinon.stub(productsService, 'addNewProduct').resolves(wantedResponse);
 
-    await productsController.putProduct(req, res);
+    await productsController.postProduct(req, res);
 
     expect(res.status).to.have.been.calledWith(422);
     expect(res.json).to.have.been.calledWith(wantedResponse);
