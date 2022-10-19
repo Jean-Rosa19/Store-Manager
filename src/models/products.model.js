@@ -35,8 +35,8 @@ const deleteAProduct = async (id) => {
     'DELETE FROM products WHERE id = ?',
     [id],
   );
-  console.log(result);
-  return true;
+  // console.log(result);
+  return result;
 };
 
 module.exports = { findAll, giveProduct, pushNewProduct, altAProduct, deleteAProduct };
