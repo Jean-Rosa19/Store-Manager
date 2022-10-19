@@ -30,4 +30,13 @@ const altAProduct = async ({ id, name }) => {
   return { error: { status: 500, message: 'Database is not responding' } };
 };
 
-module.exports = { findAll, giveProduct, pushNewProduct, altAProduct };
+const deleteAProduct = async (id) => {
+  const result = await connection.execute(
+    'DELETE FROM products WHERE id = ?',
+    [id],
+  );
+  console.log(result);
+  return true;
+};
+
+module.exports = { findAll, giveProduct, pushNewProduct, altAProduct, deleteAProduct };

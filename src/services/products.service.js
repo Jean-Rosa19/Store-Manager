@@ -31,4 +31,13 @@ const updateProduct = async (data) => {
   return { error: { status: 404, message: 'Product not found' } };
 };
 
-module.exports = { thisProductExists, findAll, addNewProduct, updateProduct };
+const handleDataToDelete = async (id) => {
+  const ids = (await productsModel.findAll()).map((p) => p.id);
+  if (!ids.includes(id)) {
+    return { error: { status: 404, message: 'Product not found' } };
+  }
+  const isDeleted = await productsModel.deleteAProduct(id);
+  return { isDeleted };
+};
+
+module.exports = { thisProductExists, findAll, addNewProduct, updateProduct, handleDataToDelete };
