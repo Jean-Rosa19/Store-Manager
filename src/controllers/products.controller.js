@@ -4,6 +4,7 @@ const getAllProducts = async (_req, res) => {
   const result = await productsService.findAll();
   res.status(200).json(result);
 };
+
 const getProductById = async (req, res) => {
   const { id } = req.params;
   const { product, message } = await productsService.thisProductExists(id);

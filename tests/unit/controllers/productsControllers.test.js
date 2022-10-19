@@ -6,8 +6,10 @@ chai.use(sinonChai);
 const productsController = require('../../../src/controllers/products.controller');
 const { productsService } = require('../../../src/services');
 const mock = require('../mocks/products.mock');
+
 describe('Camada Controller => Testes unitários', () => {
   afterEach(sinon.restore)
+
   it('Verifica se é possível retornar todos os produtos', async () => {
     const res = {};
     const req = {};
@@ -18,6 +20,7 @@ describe('Camada Controller => Testes unitários', () => {
     expect(res.status).to.have.been.calledWith(200);
     expect(res.json).to.have.been.calledWith(mock.allProductsResponse[0]);
   });
+
   it('Verifica se id invalido retorna erro', async () => {
     const res = {};
     const req = { params: { id: 9999 } };
@@ -29,6 +32,7 @@ describe('Camada Controller => Testes unitários', () => {
     expect(res.status).to.have.been.calledWith(404);
     expect(res.json).to.have.been.calledWith(errorObject);
   });
+
   it('Verifica se id valido retorna produto desejado', async () => {
     const res = {};
     const req = { params: { id: 1 } };
@@ -51,7 +55,7 @@ describe('Camada Controller => Testes unitários', () => {
 
     sinon.stub(productsService, 'addNewProduct').resolves({ createdProduct: wantedResponse });
 
-    await productsController.postProduct(req, res);
+    await productsController.putProduct(req, res);
 
     expect(res.status).to.have.been.calledWith(201);
     expect(res.json).to.have.been.calledWith(wantedResponse);
@@ -67,7 +71,7 @@ describe('Camada Controller => Testes unitários', () => {
 
     sinon.stub(productsService, 'addNewProduct').resolves(wantedResponse);
 
-    await productsController.postProduct(req, res);
+    await productsController.putProduct(req, res);
 
     expect(res.status).to.have.been.calledWith(422);
     expect(res.json).to.have.been.calledWith(wantedResponse);
