@@ -1,4 +1,4 @@
-# 🎤 Talker Manager
+# Store Manager
 ## 📡 Desenvolvimento
 
 Projeto desenvolvido na <a href="https://betrybe.com/" target="_blank">Trybe</a> durante o módulo de Back-End!
